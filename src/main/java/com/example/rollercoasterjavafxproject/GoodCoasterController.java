@@ -3,11 +3,10 @@ package com.example.rollercoasterjavafxproject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
-import java.io.IOException;
-
-public class CoasterController {
+public class GoodCoasterController {
     @FXML
     private Label welcomeText;
+
     public void initialize() throws Exception {
         GoodCoaster.readGoodData();
         TallCoaster.readTallCoasterData();

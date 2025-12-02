@@ -1,5 +1,7 @@
 package com.example.rollercoasterjavafxproject;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,6 +11,7 @@ public class GoodCoaster extends RollerCoaster {
     private String country;
     private String manufacturer;
     private int duels;
+    private Image coasterImage;
 
     public float getRating() {
         return rating;
