@@ -1,9 +1,15 @@
 package com.example.rollercoasterjavafxproject;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class GoodCoasterController {
     @FXML
@@ -15,10 +21,17 @@ public class GoodCoasterController {
     public TextField parkField;
     public TextField ratingField;
     public GoodCoaster selectedCoaster;
+    public ImageView goodCoasterImageView;
+    public Button imageSelectionButton;
 
+    FileChooser fileChooser;
     public void initialize() throws Exception {
         GoodCoaster.readGoodData();
         TallCoaster.readTallCoasterData();
+        fileChooser = new FileChooser();
+
+
+
 
         for (GoodCoaster eachCoaster: GoodCoaster.getGoodCoasters()){
             goodCoasterListView.getItems().add(eachCoaster);
@@ -39,11 +52,20 @@ public class GoodCoasterController {
 
 
     public void selectCoaster(){
+        goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
         nameField.setText(selectedCoaster.getName());
         parkField.setText(selectedCoaster.getPark());
         rankField.setText(String.valueOf(selectedCoaster.getRank()));
         ratingField.setText(String.valueOf(selectedCoaster.getRating()));
         locationField.setText(selectedCoaster.getCountry());
+    }
+
+    public void uploadImage(){
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if(selectedFile !=null){
+            selectedCoaster.goodCoasterImage = new Image(selectedFile.toURI().toString());
+            goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
+        }
     }
     public void unselectCoaster(){
         nameField.setText("");

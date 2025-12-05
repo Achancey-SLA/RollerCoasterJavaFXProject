@@ -10,7 +10,7 @@ import java.io.IOException;
 public class CoasterApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("tallCoasterView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("goodCoasterView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Hello!");
         stage.setScene(scene);

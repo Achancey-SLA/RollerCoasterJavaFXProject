@@ -48,12 +48,12 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor>
       </Rectangle>
-      <ImageView fitHeight="291.0" fitWidth="256.0" layoutX="325.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="goodCoasterImageView" fitHeight="291.0" fitWidth="256.0" layoutX="325.0" layoutY="32.0" pickOnBounds="true">
          <cursor>
             <Cursor fx:constant="OPEN_HAND" />
          </cursor></ImageView>
-      <Button layoutX="416.0" layoutY="165.0" mnemonicParsing="false" text="Add Image" />
-      <Button layoutX="392.0" layoutY="5.0" mnemonicParsing="false" text="go to tallest coasters" />
+      <Button fx:id="imageSelectionButton" layoutX="488.0" layoutY="4.0" mnemonicParsing="false" onAction="#uploadImage" text="Add Image" />
+      <Button layoutX="349.0" layoutY="4.0" mnemonicParsing="false" text="go to tallest coasters" />
       <Label layoutX="13.0" layoutY="3.0" prefHeight="28.0" prefWidth="312.0" text="World's Best Rollercoasters">
          <font>
             <Font name="American Typewriter" size="23.0" />
