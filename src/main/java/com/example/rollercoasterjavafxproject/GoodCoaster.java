@@ -11,7 +11,7 @@ public class GoodCoaster extends RollerCoaster {
     private String country;
     private String manufacturer;
     private int duels;
-    private Image coasterImage;
+    public Image goodCoasterImage;
 
     public float getRating() {
         return rating;
@@ -105,6 +105,6 @@ public class GoodCoaster extends RollerCoaster {
     }
 
     public String toString(){
-        return name+ " at "+park+" in "+ country +" is ranked the #"+rank +" best coaster with a rating of " +rating + " after " +duels+" duels." ;
+        return rank+": "+name ;
     }
 }

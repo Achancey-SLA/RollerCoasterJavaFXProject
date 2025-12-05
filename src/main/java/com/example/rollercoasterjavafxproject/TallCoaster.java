@@ -1,5 +1,7 @@
 package com.example.rollercoasterjavafxproject;
 
+import javafx.scene.image.Image;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
