@@ -5,12 +5,16 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class TallCoaster extends RollerCoaster {
-    private boolean operating;
-    private LocalDate opened;
-    private Float height;
+public class TallCoaster extends RollerCoaster {
+    public boolean operating;
+    protected LocalDate opened;
+    public Float height;
 
     public boolean isOperating() {
+        return operating;
+    }
+
+    public boolean getOperating() {
         return operating;
     }
 

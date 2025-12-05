@@ -8,16 +8,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rollercoasterjavafxproject.TallCoasterController">
    <children>
-      <TableView prefHeight="400.0" prefWidth="365.0">
+      <TableView fx:id="TallCoasterData" prefHeight="400.0" prefWidth="365.0">
         <columns>
-          <TableColumn prefWidth="33.0" text="Rank" />
-          <TableColumn prefWidth="73.0" text="Name" />
-            <TableColumn text="Location" />
-            <TableColumn prefWidth="58.0" text="Active" />
-            <TableColumn prefWidth="61.0" text="Opened" />
-            <TableColumn prefWidth="59.0" text="Height" />
+          <TableColumn fx:id="rankColumn" prefWidth="33.0" text="Rank" />
+          <TableColumn fx:id="titleColumn" prefWidth="73.0" text="Name" />
+            <TableColumn fx:id="LocationColumn" text="Location" />
+            <TableColumn fx:id="ActiveColumn" prefWidth="58.0" text="Active" />
+            <TableColumn fx:id="DateColumn" prefWidth="61.0" text="Opened" />
+            <TableColumn fx:id="HeightColumn" prefWidth="59.0" text="Height" />
         </columns>
       </TableView>
       <ImageView fitHeight="329.0" fitWidth="237.0" layoutX="365.0" pickOnBounds="true" preserveRatio="true" />
