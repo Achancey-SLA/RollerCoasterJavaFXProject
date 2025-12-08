@@ -18,7 +18,7 @@
             <TableColumn fx:id="HeightColumn" prefWidth="59.0" text="Height" />
         </columns>
       </TableView>
-      <ImageView fx:id="TallCoasterImageView" fitHeight="329.0" fitWidth="237.0" layoutX="365.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fx:id="TallCoasterImageView" fitHeight="329.0" fitWidth="237.0" layoutX="365.0" pickOnBounds="true" />
       <Button layoutX="365.0" layoutY="254.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="146.0" prefWidth="125.0" text="Change Image" />
       <Button layoutX="485.0" layoutY="254.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="146.0" prefWidth="119.0" text="GoodCoaster" />
    </children>
