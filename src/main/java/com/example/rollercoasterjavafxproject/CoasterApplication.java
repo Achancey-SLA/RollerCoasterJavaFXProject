@@ -9,9 +9,10 @@ import java.io.IOException;
 
 public class CoasterApplication extends Application {
     static Stage mainStage;
+
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("goodCoasterView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("tallCoasterView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Hello!");
         stage.setScene(scene);
@@ -24,5 +25,11 @@ public class CoasterApplication extends Application {
         Scene newScene = new Scene(fxmlLoader.load(), 600, 400);
         mainStage.setScene(newScene);
 
+    }
+
+    public static void goodScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("GoodCoasterView.fxml"));
+        Scene newScene = new Scene(fxmlLoader.load(), 600, 400);
+        mainStage.setScene(newScene);
     }
 }

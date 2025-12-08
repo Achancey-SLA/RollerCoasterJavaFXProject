@@ -11,6 +11,7 @@ public class TallCoaster extends RollerCoaster {
     public boolean operating;
     protected LocalDate opened;
     public Float height;
+    public Image TallCoasterImages;
 
     public boolean isOperating() {
         return operating;

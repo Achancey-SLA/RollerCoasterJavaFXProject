@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.shape.Rectangle?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.rollercoasterjavafxproject.TallCoasterController">
    <children>
@@ -20,9 +18,8 @@
             <TableColumn fx:id="HeightColumn" prefWidth="59.0" text="Height" />
         </columns>
       </TableView>
-      <ImageView fitHeight="329.0" fitWidth="237.0" layoutX="365.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="365.0" layoutY="327.0" mnemonicParsing="false" prefHeight="73.0" prefWidth="237.0" text="Change Image" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="329.0" layoutX="365.0" layoutY="-1.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="4.0" width="237.0" />
-      <Label layoutX="445.0" layoutY="122.0" prefHeight="17.0" prefWidth="58.0" text="Image" />
+      <ImageView fx:id="TallCoasterImageView" fitHeight="329.0" fitWidth="237.0" layoutX="365.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="365.0" layoutY="254.0" mnemonicParsing="false" onAction="#selectImage" prefHeight="146.0" prefWidth="125.0" text="Change Image" />
+      <Button layoutX="485.0" layoutY="254.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="146.0" prefWidth="119.0" text="GoodCoaster" />
    </children>
 </Pane>

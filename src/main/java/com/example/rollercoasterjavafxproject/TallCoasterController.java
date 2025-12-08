@@ -1,11 +1,19 @@
 package com.example.rollercoasterjavafxproject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 
 public class TallCoasterController {
@@ -18,6 +26,9 @@ public class TallCoasterController {
     public TableColumn <TallCoaster, Boolean> ActiveColumn;
     public TableColumn <TallCoaster, LocalDate> DateColumn;
     public TableColumn <TallCoaster, Float> HeightColumn;
+
+    public ImageView TallCoasterImageView;
+    TallCoaster selectedCoaster;
 
 
     public void initialize() throws Exception {
@@ -33,10 +44,38 @@ public class TallCoasterController {
         ActiveColumn.setCellValueFactory(new PropertyValueFactory<>("operating"));
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("opened"));
         HeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
+
+        TallCoasterData.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) ->{
+                    if (newValue != null) {
+                        selectedCoaster = newValue;
+                        TallCoasterImageView.setImage(selectedCoaster.TallCoasterImages);
+                    } else {
+
+                    }
+                });
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Welcome to JavaFX Application!");
+    FileChooser fileChooser = new FileChooser();
+
+    public void selectImage() {
+        File selectedFile = fileChooser.showOpenDialog(null);
+        if (selectedFile != null) {
+            System.out.println("Images that might work");
+            System.out.println(selectedFile.getPath());
+            selectedCoaster.TallCoasterImages = new Image(selectedFile.toURI().toString());
+            TallCoasterImageView.setImage(selectedCoaster.TallCoasterImages);
+        }
+
     }
+    public void selectColumn(){
+
+    }
+
+    public void changeScene() throws IOException {
+CoasterApplication.goodScene();
+    }
+
+
+
 }
