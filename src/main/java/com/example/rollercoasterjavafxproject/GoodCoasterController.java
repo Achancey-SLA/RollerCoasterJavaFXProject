@@ -1,6 +1,8 @@
 package com.example.rollercoasterjavafxproject;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -8,8 +10,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
+import java.io.IOException;
 
 public class GoodCoasterController {
     @FXML
@@ -88,5 +92,9 @@ public class GoodCoasterController {
     @FXML
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
+    }
+
+    public void changeScene() throws IOException {
+        CoasterApplication.tallScene();
     }
 }

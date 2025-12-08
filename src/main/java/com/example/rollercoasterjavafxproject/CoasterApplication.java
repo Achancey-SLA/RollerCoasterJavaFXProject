@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class CoasterApplication extends Application {
+    static Stage mainStage;
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("goodCoasterView.fxml"));
@@ -15,5 +16,13 @@ public class CoasterApplication extends Application {
         stage.setTitle("Hello!");
         stage.setScene(scene);
         stage.show();
+        mainStage = stage;
+    }
+
+    public static void tallScene() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(CoasterApplication.class.getResource("tallCoasterView.fxml"));
+        Scene newScene = new Scene(fxmlLoader.load(), 600, 400);
+        mainStage.setScene(newScene);
+
     }
 }

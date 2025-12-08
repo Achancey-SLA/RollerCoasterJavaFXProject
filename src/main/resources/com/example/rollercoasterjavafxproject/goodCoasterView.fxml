@@ -53,7 +53,7 @@
             <Cursor fx:constant="OPEN_HAND" />
          </cursor></ImageView>
       <Button fx:id="imageSelectionButton" layoutX="488.0" layoutY="4.0" mnemonicParsing="false" onAction="#uploadImage" text="Add Image" />
-      <Button layoutX="349.0" layoutY="4.0" mnemonicParsing="false" text="go to tallest coasters" />
+      <Button layoutX="349.0" layoutY="4.0" mnemonicParsing="false" onAction="#changeScene" text="go to tallest coasters" />
       <Label layoutX="13.0" layoutY="3.0" prefHeight="28.0" prefWidth="312.0" text="World's Best Rollercoasters">
          <font>
             <Font name="American Typewriter" size="23.0" />
