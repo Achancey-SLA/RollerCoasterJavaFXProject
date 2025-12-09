@@ -38,8 +38,9 @@ public class TallCoasterController {
 
 
     public void initialize() throws Exception {
-        GoodCoaster.readGoodData();
-        TallCoaster.readTallCoasterData();
+        if(TallCoaster.getCoastersList().isEmpty()) {
+            TallCoaster.readTallCoasterData();
+        }
         for (TallCoaster eachCoaster: TallCoaster.getTallcoastersList()){
             TallCoasterData.getItems().add(eachCoaster);
 

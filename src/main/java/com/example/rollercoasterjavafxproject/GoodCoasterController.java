@@ -30,8 +30,9 @@ public class GoodCoasterController {
 
     FileChooser fileChooser;
     public void initialize() throws Exception {
-        GoodCoaster.readGoodData();
-        TallCoaster.readTallCoasterData();
+        if(GoodCoaster.getGoodCoasters().isEmpty()) {
+            GoodCoaster.readGoodData();
+        }
         fileChooser = new FileChooser();
 
 
