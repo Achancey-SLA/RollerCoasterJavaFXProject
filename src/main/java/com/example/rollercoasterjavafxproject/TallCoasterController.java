@@ -7,11 +7,17 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.converter.BooleanStringConverter;
+import javafx.util.converter.FloatStringConverter;
+import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.LocalDateStringConverter;
 
+import javax.xml.stream.Location;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -38,12 +44,18 @@ public class TallCoasterController {
             TallCoasterData.getItems().add(eachCoaster);
 
         }
+        rankColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        titleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         LocationColumn.setCellValueFactory(new PropertyValueFactory<>("park"));
+        LocationColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         ActiveColumn.setCellValueFactory(new PropertyValueFactory<>("operating"));
+        ActiveColumn.setCellFactory(TextFieldTableCell.forTableColumn(new BooleanStringConverter()));
         DateColumn.setCellValueFactory(new PropertyValueFactory<>("opened"));
+        DateColumn.setCellFactory(TextFieldTableCell.forTableColumn(new LocalDateStringConverter()));
         HeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
+        HeightColumn.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 
         TallCoasterData.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->{
@@ -54,6 +66,33 @@ public class TallCoasterController {
 
                     }
                 });
+        rankColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, Integer> t) -> {
+                    selectedCoaster.setRank(t.getNewValue());
+                });
+        titleColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, String> t) -> {
+                    selectedCoaster.setName(t.getNewValue());
+                });
+        LocationColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, String> t) -> {
+                    selectedCoaster.setPark(t.getNewValue());
+                });
+        ActiveColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, Boolean> t) -> {
+                    selectedCoaster.setOperating(t.getNewValue());
+                });
+        DateColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, LocalDate> t) -> {
+                    selectedCoaster.setOpened(t.getNewValue());
+                });
+        HeightColumn.setOnEditCommit(
+                (TableColumn.CellEditEvent<TallCoaster, Float> t) -> {
+                    selectedCoaster.setHeight(t.getNewValue());
+                });
+
+
+
     }
 
     FileChooser fileChooser = new FileChooser();
@@ -74,6 +113,11 @@ public class TallCoasterController {
 
     public void changeScene() throws IOException {
 CoasterApplication.goodScene();
+    }
+
+    public void editData(){
+        selectedCoaster.name = titleColumn.getCellData(TallCoaster.tallCoastersList.indexOf(selectedCoaster));
+        System.out.println(selectedCoaster);
     }
 
 
