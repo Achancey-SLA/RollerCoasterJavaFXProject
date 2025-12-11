@@ -12,7 +12,7 @@ public class TallCoaster extends RollerCoaster implements Serializable {
     public boolean operating;
     protected LocalDate opened;
     public Float height;
-    public Image TallCoasterImages;
+    transient public Image TallCoasterImages;
 
     public boolean isOperating() {
         return operating;
