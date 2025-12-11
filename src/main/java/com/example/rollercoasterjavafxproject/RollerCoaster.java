@@ -1,8 +1,8 @@
 package com.example.rollercoasterjavafxproject;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class RollerCoaster {
+public class RollerCoaster implements Serializable {
     protected String name;
     protected String park;
     protected int rank;
