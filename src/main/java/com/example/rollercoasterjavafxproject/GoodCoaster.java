@@ -1,17 +1,17 @@
 package com.example.rollercoasterjavafxproject;
-
+import java.io.Serializable;
 import javafx.scene.image.Image;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GoodCoaster extends RollerCoaster {
+public class GoodCoaster extends RollerCoaster implements Serializable {
     private float rating;
     private String country;
     private String manufacturer;
     private int duels;
-    public Image goodCoasterImage;
+    transient public Image goodCoasterImage;
 
     public float getRating() {
         return rating;
@@ -55,7 +55,7 @@ public class GoodCoaster extends RollerCoaster {
         goodCoasters.add(this);
     }
 
-    private static ArrayList<GoodCoaster> goodCoasters = new ArrayList<>();
+    public static ArrayList<GoodCoaster> goodCoasters = new ArrayList<>();
 
     public static ArrayList<GoodCoaster> getGoodCoasters() {
         return goodCoasters;
