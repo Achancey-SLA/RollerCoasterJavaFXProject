@@ -3,11 +3,12 @@ package com.example.rollercoasterjavafxproject;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class TallCoaster extends RollerCoaster {
+public class TallCoaster extends RollerCoaster implements Serializable {
     public boolean operating;
     protected LocalDate opened;
     public Float height;
