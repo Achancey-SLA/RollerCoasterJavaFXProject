@@ -32,4 +32,8 @@ public class CoasterApplication extends Application {
         Scene newScene = new Scene(fxmlLoader.load(), 600, 400);
         mainStage.setScene(newScene);
     }
+
+    public void stop() throws Exception{
+        TallCoaster.saveData();
+    }
 }

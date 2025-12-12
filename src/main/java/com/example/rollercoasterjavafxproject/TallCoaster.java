@@ -2,8 +2,7 @@ package com.example.rollercoasterjavafxproject;
 
 import javafx.scene.image.Image;
 
-import java.io.File;
-import java.io.Serializable;
+import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,6 +12,7 @@ public class TallCoaster extends RollerCoaster implements Serializable {
     protected LocalDate opened;
     public Float height;
     transient public Image TallCoasterImages;
+    private static final long serialVersionUID = 1L;
 
     public boolean isOperating() {
         return operating;
@@ -137,6 +137,22 @@ return name + " located at " + park + " the rank is number " + rank + " is " + o
           //System.out.println(coaster1);
       }
 
+
+    }
+    static void saveData() throws Exception{
+        FileOutputStream fileOut = new FileOutputStream("tallCoasterSave");
+        ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+        objectOut.writeObject(tallCoastersList);
+        objectOut.close();
+        fileOut.close();
+    }
+
+    static void restoreData() throws Exception{
+        FileInputStream fileIn = new FileInputStream("tallCoasterSave");
+        ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+        tallCoastersList = (ArrayList<TallCoaster>) objectIn.readObject();
+        objectIn.close();
+        fileIn.close();
 
     }
 

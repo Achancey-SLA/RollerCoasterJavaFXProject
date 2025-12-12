@@ -38,6 +38,8 @@ public class TallCoasterController {
 
 
     public void initialize() throws Exception {
+        TallCoaster.restoreData();
+
         if(TallCoaster.getCoastersList().isEmpty()) {
             TallCoaster.readTallCoasterData();
         }
@@ -91,7 +93,6 @@ public class TallCoasterController {
                 (TableColumn.CellEditEvent<TallCoaster, Float> t) -> {
                     selectedCoaster.setHeight(t.getNewValue());
                 });
-
 
 
     }
