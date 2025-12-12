@@ -27,32 +27,19 @@ public class GoodCoasterController {
     public GoodCoaster selectedCoaster;
     public ImageView goodCoasterImageView;
     public Button imageSelectionButton;
-    FileOutputStream fileOut;
-    ObjectOutputStream objectsOut;
-    FileInputStream objectsFileIn;
-    ObjectInputStream objectsIn;
     ArrayList<GoodCoaster> inputList;
 
     FileChooser fileChooser;
     public void initialize() throws Exception {
-        fileOut = new FileOutputStream("objects.ser");
-        objectsOut = new ObjectOutputStream(fileOut);
-        objectsFileIn = new FileInputStream("objects.ser");
-        objectsIn = new ObjectInputStream(objectsFileIn);
-
-        inputList = null;
         try {
-            inputList = (ArrayList<GoodCoaster>) objectsIn.readObject();
-        }
-        catch(IOException ioe){
-            ioe.printStackTrace();
+            GoodCoaster.restoreData();
+        } catch (Exception ex) {
+
         }
 
         if(GoodCoaster.getGoodCoasters().isEmpty()) {
             GoodCoaster.readGoodData();
         }
-
-        //GoodCoaster.goodCoasters = (ArrayList<GoodCoaster>) objectsIn.readObject();
 
         fileChooser = new FileChooser();
 
@@ -101,7 +88,7 @@ public class GoodCoasterController {
         nameField.setText("");
     }
 
-    public void editCoasterData() throws IOException {
+    public void editCoasterData() throws Exception {
         System.out.println("edit");
         selectedCoaster.name = nameField.getText();
         selectedCoaster.rank = Integer.parseInt(rankField.getText());
@@ -109,8 +96,7 @@ public class GoodCoasterController {
         selectedCoaster.setCountry(locationField.getText());
         selectedCoaster.setRating(Float.parseFloat(ratingField.getText()));
         goodCoasterListView.refresh();
-        objectsOut.writeObject(GoodCoaster.getGoodCoasters());
-        fileOut.close();
+        GoodCoaster.saveData();
     }
 
     @FXML

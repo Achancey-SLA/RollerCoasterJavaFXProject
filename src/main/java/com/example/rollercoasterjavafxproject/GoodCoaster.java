@@ -1,17 +1,19 @@
 package com.example.rollercoasterjavafxproject;
-import java.io.Serializable;
+import java.io.*;
+
 import javafx.scene.image.Image;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GoodCoaster extends RollerCoaster implements Serializable {
+    private static final long serialVerionUID = 1L;
     private float rating;
     private String country;
     private String manufacturer;
     private int duels;
     transient public Image goodCoasterImage;
+
 
     public float getRating() {
         return rating;
@@ -106,5 +108,21 @@ public class GoodCoaster extends RollerCoaster implements Serializable {
 
     public String toString(){
         return rank+": "+name ;
+    }
+
+    static void saveData() throws Exception{
+        FileOutputStream filesOut = new FileOutputStream("goodObjects");
+        ObjectOutputStream objectsOut = new ObjectOutputStream(filesOut);
+        objectsOut.writeObject(goodCoasters);
+        filesOut.close();
+        objectsOut.close();
+    }
+
+    static void restoreData() throws Exception{
+        FileInputStream filesIn = new FileInputStream("goodObjects");
+        ObjectInputStream objectsIn = new ObjectInputStream(filesIn);
+        goodCoasters = (ArrayList<GoodCoaster>) objectsIn.readObject();
+        objectsIn.close();
+        filesIn.close();
     }
 }
