@@ -13,6 +13,7 @@ public class TallCoaster extends RollerCoaster implements Serializable {
     public Float height;
     transient public Image TallCoasterImages;
     private static final long serialVersionUID = 1L;
+    String imagePath;
 
     public boolean isOperating() {
         return operating;

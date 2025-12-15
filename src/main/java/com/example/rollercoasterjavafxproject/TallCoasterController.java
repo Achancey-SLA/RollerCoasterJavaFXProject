@@ -43,7 +43,11 @@ public class TallCoasterController {
         if(TallCoaster.getCoastersList().isEmpty()) {
             TallCoaster.readTallCoasterData();
         }
+
         for (TallCoaster eachCoaster: TallCoaster.getTallcoastersList()){
+            if (eachCoaster.imagePath != null){
+                eachCoaster.TallCoasterImages = new Image(eachCoaster.imagePath);
+            }
             TallCoasterData.getItems().add(eachCoaster);
 
         }
@@ -104,6 +108,7 @@ public class TallCoasterController {
         if (selectedFile != null) {
             System.out.println("Images that might work");
             System.out.println(selectedFile.getPath());
+            selectedCoaster.imagePath = selectedFile.toURI().toString();
             selectedCoaster.TallCoasterImages = new Image(selectedFile.toURI().toString());
             TallCoasterImageView.setImage(selectedCoaster.TallCoasterImages);
         }
