@@ -3,6 +3,7 @@ import java.io.*;
 
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,6 +14,7 @@ public class GoodCoaster extends RollerCoaster implements Serializable {
     private String manufacturer;
     private int duels;
     transient public Image goodCoasterImage;
+    public String goodImagePath;
 
 
     public float getRating() {

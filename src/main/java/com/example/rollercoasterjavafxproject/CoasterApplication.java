@@ -35,5 +35,6 @@ public class CoasterApplication extends Application {
 
     public void stop() throws Exception{
         TallCoaster.saveData();
+        GoodCoaster.saveData();
     }
 }
