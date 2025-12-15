@@ -43,11 +43,7 @@ public class GoodCoasterController {
 
         fileChooser = new FileChooser();
 
-        for (GoodCoaster eachCoaster: GoodCoaster.getGoodCoasters()){
-            if(eachCoaster.goodImagePath!=null){
-                eachCoaster.goodCoasterImage = new Image(eachCoaster.goodImagePath);
-            }
-        }
+
 
 
         for (GoodCoaster eachCoaster: GoodCoaster.getGoodCoasters()){
@@ -81,7 +77,6 @@ public class GoodCoasterController {
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile !=null){
             selectedCoaster.goodCoasterImage = new Image(selectedFile.toURI().toString());
-            selectedCoaster.goodImagePath = selectedFile.toURI().toString();
             goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
         }
     }

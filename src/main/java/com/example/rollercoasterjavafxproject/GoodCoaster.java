@@ -14,7 +14,7 @@ public class GoodCoaster extends RollerCoaster implements Serializable {
     private String manufacturer;
     private int duels;
     transient public Image goodCoasterImage;
-    public String goodImagePath;
+
 
 
     public float getRating() {
