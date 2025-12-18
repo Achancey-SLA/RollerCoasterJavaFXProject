@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,9 +18,12 @@ import javafx.util.converter.FloatStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 import javafx.util.converter.LocalDateStringConverter;
 
+import javax.imageio.ImageIO;
 import javax.xml.stream.Location;
 import java.io.File;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serial;
 import java.time.LocalDate;
 
 public class TallCoasterController {
@@ -38,19 +42,22 @@ public class TallCoasterController {
 
 
     public void initialize() throws Exception {
-        TallCoaster.restoreData();
+        try {
+            TallCoaster.restoreData();
+        } catch(Exception ex){}
 
-        if(TallCoaster.getCoastersList().isEmpty()) {
+
+        if(TallCoaster.tallCoastersList.isEmpty()) {
             TallCoaster.readTallCoasterData();
-        }
 
+        }
         for (TallCoaster eachCoaster: TallCoaster.getTallcoastersList()){
-            if (eachCoaster.imagePath != null){
-                eachCoaster.TallCoasterImages = new Image(eachCoaster.imagePath);
-            }
+
             TallCoasterData.getItems().add(eachCoaster);
 
         }
+
+
         rankColumn.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         rankColumn.setCellValueFactory(new PropertyValueFactory<>("rank"));
         titleColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -64,6 +71,7 @@ public class TallCoasterController {
         HeightColumn.setCellValueFactory(new PropertyValueFactory<>("height"));
         HeightColumn.setCellFactory(TextFieldTableCell.forTableColumn(new FloatStringConverter()));
 
+        TallCoasterData.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         TallCoasterData.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) ->{
                     if (newValue != null) {
@@ -108,7 +116,7 @@ public class TallCoasterController {
         if (selectedFile != null) {
             System.out.println("Images that might work");
             System.out.println(selectedFile.getPath());
-            selectedCoaster.imagePath = selectedFile.toURI().toString();
+
             selectedCoaster.TallCoasterImages = new Image(selectedFile.toURI().toString());
             TallCoasterImageView.setImage(selectedCoaster.TallCoasterImages);
         }
@@ -126,6 +134,10 @@ CoasterApplication.goodScene();
         selectedCoaster.name = titleColumn.getCellData(TallCoaster.tallCoastersList.indexOf(selectedCoaster));
         System.out.println(selectedCoaster);
     }
+
+
+
+
 
 
 

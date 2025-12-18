@@ -1,7 +1,9 @@
 package com.example.rollercoasterjavafxproject;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ public class TallCoaster extends RollerCoaster implements Serializable {
     public Float height;
     transient public Image TallCoasterImages;
     private static final long serialVersionUID = 1L;
-    String imagePath;
+
 
     public boolean isOperating() {
         return operating;
@@ -155,6 +157,28 @@ return name + " located at " + park + " the rank is number " + rank + " is " + o
         objectIn.close();
         fileIn.close();
 
+    }
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+// read NON-transient fields
+        s.defaultReadObject();
+        // read transient fields
+        Image MaybeCoasterImages = null;
+        try {
+            MaybeCoasterImages = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        } catch (Exception ex) {
+            // do nothing
+        }
+        TallCoasterImages = MaybeCoasterImages;
+    }
+    @Serial
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        // write NON-transient fields
+        s.defaultWriteObject();
+        // write transient fields
+        if (TallCoasterImages != null) {
+            ImageIO.write(SwingFXUtils.fromFXImage(TallCoasterImages, null), "png", s);
+        }
     }
 
 
