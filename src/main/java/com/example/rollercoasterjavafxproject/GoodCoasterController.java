@@ -1,16 +1,11 @@
 package com.example.rollercoasterjavafxproject;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -27,10 +22,16 @@ public class GoodCoasterController {
     public GoodCoaster selectedCoaster;
     public ImageView goodCoasterImageView;
     public Button imageSelectionButton;
+    public Image noImage;
+    boolean multipleSelected;
     ArrayList<GoodCoaster> inputList;
-
+    ObservableList<GoodCoaster> selectedItems;
     FileChooser fileChooser;
     public void initialize() throws Exception {
+
+        noImage = new Image(new FileInputStream("noImage.png"));
+
+        goodCoasterListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
         try {
             GoodCoaster.restoreData();
         } catch (Exception ex) {
@@ -56,16 +57,39 @@ public class GoodCoasterController {
                     // newValue can be null if nothing IS NOW selected
                     if (newValue != null) {
                         selectedCoaster = newValue;
-                        selectCoaster();
-                    } else {
+                        selectedItems = goodCoasterListView.getSelectionModel().getSelectedItems();
+                        if(selectedItems.size()==1) {
+                            selectSingleCoaster();
+                        }
+                        else{
+                            selectMultipleCoasters();
+                        }
+                    }
+                    else {
                         unselectCoaster();
                     }
                 });
     }
 
+    public void selectMultipleCoasters(){
+        multipleSelected = true;
+        nameField.setText("");
+        parkField.setText("");
+        rankField.setText("");
+        ratingField.setText("");
+        nameField.setText("");
+        locationField.setText("");
+        goodCoasterImageView.setImage(noImage);
 
-    public void selectCoaster(){
-        goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
+    }
+
+    public void selectSingleCoaster(){
+        multipleSelected = false;
+        if(selectedCoaster.goodCoasterImage!=null) {
+            goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
+        } else{
+            goodCoasterImageView.setImage(noImage);
+        }
         nameField.setText(selectedCoaster.getName());
         parkField.setText(selectedCoaster.getPark());
         rankField.setText(String.valueOf(selectedCoaster.getRank()));
@@ -76,8 +100,12 @@ public class GoodCoasterController {
     public void uploadImage(){
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile !=null){
-            selectedCoaster.goodCoasterImage = new Image(selectedFile.toURI().toString());
-            goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
+            for(GoodCoaster eachSelected:selectedItems){
+                eachSelected.goodCoasterImage = new Image(selectedFile.toURI().toString());
+                goodCoasterImageView.setImage(selectedCoaster.goodCoasterImage);
+
+            }
+
         }
     }
     public void unselectCoaster(){
@@ -86,17 +114,41 @@ public class GoodCoasterController {
         rankField.setText("");
         ratingField.setText("");
         nameField.setText("");
+        locationField.setText("");
     }
 
     public void editCoasterData() throws Exception {
         System.out.println("edit");
-        selectedCoaster.name = nameField.getText();
-        selectedCoaster.rank = Integer.parseInt(rankField.getText());
-        selectedCoaster.setPark(parkField.getText());
-        selectedCoaster.setCountry(locationField.getText());
-        selectedCoaster.setRating(Float.parseFloat(ratingField.getText()));
-        goodCoasterListView.refresh();
-        GoodCoaster.saveData();
+        if(!multipleSelected) {
+            selectedCoaster.name = nameField.getText();
+            selectedCoaster.rank = Integer.parseInt(rankField.getText());
+            selectedCoaster.setPark(parkField.getText());
+            selectedCoaster.setCountry(locationField.getText());
+            selectedCoaster.setRating(Float.parseFloat(ratingField.getText()));
+            goodCoasterListView.refresh();
+            GoodCoaster.saveData();
+        }
+        else{
+            for (GoodCoaster eachSelected: selectedItems){
+                if(!nameField.getText().isEmpty()) {
+                    eachSelected.name = nameField.getText();
+                }
+                if(!rankField.getText().isEmpty()) {
+                    eachSelected.setRank(Integer.parseInt(rankField.getText()));
+                }
+                if(!parkField.getText().isEmpty()) {
+                    eachSelected.setPark(parkField.getText());
+                }
+                if(!locationField.getText().isEmpty()) {
+                    eachSelected.setCountry(locationField.getText());
+                }
+                if(!ratingField.getText().isEmpty()) {
+                    eachSelected.setRating(Float.parseFloat(ratingField.getText()));
+                }
+                goodCoasterListView.refresh();
+                GoodCoaster.saveData();
+            }
+        }
     }
 
     @FXML

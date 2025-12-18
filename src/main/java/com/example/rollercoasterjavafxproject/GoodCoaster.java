@@ -1,6 +1,7 @@
 package com.example.rollercoasterjavafxproject;
 import java.io.*;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
@@ -127,4 +128,34 @@ public class GoodCoaster extends RollerCoaster implements Serializable {
         objectsIn.close();
         filesIn.close();
     }
+
+
+
+    @Serial
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException {
+// read NON-transient fields
+        s.defaultReadObject();
+        // read transient fields
+        Image maybeImage = null;
+        try {
+            maybeImage = SwingFXUtils.toFXImage(ImageIO.read(s), null);
+        } catch (Exception ex) {
+            // do nothing
+        }
+        goodCoasterImage = maybeImage;
+    }
+
+    // implements custom serialize for
+    //     transient posterImage field
+    @Serial
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        // write NON-transient fields
+        s.defaultWriteObject();
+        // write transient fields
+        if (goodCoasterImage != null) {
+            ImageIO.write(SwingFXUtils.fromFXImage(goodCoasterImage, null), "png", s);
+        }
+    }
+
+
 }
